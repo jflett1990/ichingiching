@@ -1,0 +1,504 @@
+/* Sophisticated Global Styles for Wisdom Oracle I Ching App */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Premium Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+
+/* CSS Custom Properties - Updated via Theme System */
+:root {
+  /* Default Liquid Glass Theme */
+  --color-primary: #667eea;
+  --color-secondary: #764ba2;
+  --color-accent: #f093fb;
+  --color-background: #f7fafc;
+  --color-text: #2d3748;
+  --color-glass: rgba(255, 255, 255, 0.1);
+  --color-glass-hover: rgba(255, 255, 255, 0.2);
+  --color-glass-border: rgba(255, 255, 255, 0.2);
+  
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-secondary: 'Playfair Display', Georgia, serif;
+  
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Effects */
+  --blur-intensity: 20px;
+  --glow-intensity: 0.5;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background: var(--color-background);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* App Container */
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Main Content Area */
+.main-content {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  padding-top: 4rem; /* Account for navigation */
+}
+
+/* Liquid Glass Base Component */
+.liquid-glass {
+  background: var(--color-glass);
+  backdrop-filter: blur(var(--blur-intensity));
+  -webkit-backdrop-filter: blur(var(--blur-intensity));
+  border: 1px solid var(--color-glass-border);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all var(--duration-normal) var(--easing-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.liquid-glass > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Glass Morphing Animation */
+.glass-morphing {
+  animation: morphing 6s ease-in-out infinite;
+}
+
+@keyframes morphing {
+  0%, 100% {
+    border-radius: var(--radius-lg);
+    transform: scale(1);
+  }
+  33% {
+    border-radius: var(--radius-2xl);
+    transform: scale(1.01);
+  }
+  66% {
+    border-radius: var(--radius-md);
+    transform: scale(0.99);
+  }
+}
+
+/* Ripple Effect */
+.glass-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.glass-ripple:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Premium Button Styles */
+.btn-premium {
+  @apply relative overflow-hidden;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--easing-smooth);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left var(--duration-slow) var(--easing-smooth);
+}
+
+.btn-premium:hover::before {
+  left: 100%;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.15),
+    0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-premium:active {
+  transform: translateY(0);
+}
+
+/* Loading Animations */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
+/* Theme-Specific Styles */
+
+/* Liquid Glass Theme (Default) */
+.theme-liquid-glass {
+  --color-primary: #667eea;
+  --color-secondary: #764ba2;
+  --color-accent: #f093fb;
+  --color-background: #f7fafc;
+  --color-text: #2d3748;
+}
+
+/* Art Nouveau Theme */
+.theme-art-nouveau {
+  --color-primary: #d4af37;
+  --color-secondary: #8b4513;
+  --color-accent: #daa520;
+  --color-background: #2f1b14;
+  --color-text: #f5f5dc;
+  --font-primary: 'Cinzel', Georgia, serif;
+}
+
+.theme-art-nouveau .liquid-glass {
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(212, 175, 55, 0.1);
+}
+
+/* Cyberpunk Theme */
+.theme-cyberpunk {
+  --color-primary: #00ffff;
+  --color-secondary: #ff00ff;
+  --color-accent: #00ff00;
+  --color-background: #0a0a0a;
+  --color-text: #ffffff;
+  --font-primary: 'Orbitron', monospace;
+}
+
+.theme-cyberpunk .liquid-glass {
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(0, 255, 255, 0.1);
+}
+
+.theme-cyberpunk::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 255, 0.03) 2px,
+      rgba(0, 255, 255, 0.03) 4px
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pop Art Theme */
+.theme-pop-art {
+  --color-primary: #ff6b6b;
+  --color-secondary: #4ecdc4;
+  --color-accent: #45b7d1;
+  --color-background: #ffe66d;
+  --color-text: #2c3e50;
+  --font-primary: 'Inter', sans-serif;
+}
+
+.theme-pop-art .liquid-glass {
+  border: 2px solid rgba(255, 107, 107, 0.3);
+  box-shadow: 
+    8px 8px 0 rgba(0, 0, 0, 0.1),
+    0 8px 32px rgba(255, 107, 107, 0.2);
+}
+
+/* Traditional Zen Theme */
+.theme-traditional-zen {
+  --color-primary: #2d3748;
+  --color-secondary: #4a5568;
+  --color-accent: #718096;
+  --color-background: #f7fafc;
+  --color-text: #1a202c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .main-content {
+    padding-top: 3rem;
+  }
+  
+  .btn-premium {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+  
+  .liquid-glass {
+    margin: 0.5rem;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .glass-morphing {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .liquid-glass {
+    border-width: 2px;
+    border-color: var(--color-text);
+  }
+  
+  .btn-premium {
+    border: 2px solid var(--color-text);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .app-container {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .liquid-glass {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+  
+  .btn-premium {
+    background: #333 !important;
+    color: white !important;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-background: #1a202c;
+    --color-text: #f7fafc;
+    --color-glass: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Focus Management */
+.focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Selection Styles */
+::selection {
+  background: var(--color-primary);
+  color: white;
+}
+
+::-moz-selection {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+}
+
+/* Utility Classes */
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.backdrop-blur-strong {
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}
+
+.border-glow {
+  box-shadow: 
+    0 0 20px rgba(var(--color-primary), 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Animation Utilities */
+.fade-in {
+  animation: fadeIn var(--duration-normal) var(--easing-smooth);
+}
+
+.slide-up {
+  animation: slideUp var(--duration-normal) var(--easing-smooth);
+}
+
+.scale-in {
+  animation: scaleIn var(--duration-normal) var(--easing-bounce);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.9); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
