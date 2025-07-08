@@ -1,0 +1,514 @@
+{
+  "1": {
+    "name": "The Creative",
+    "chinese": "乾",
+    "number": 1,
+    "trigrams": ["heaven", "heaven"],
+    "lines": [1, 1, 1, 1, 1, 1],
+    "unicode": "䷀"
+  },
+  "2": {
+    "name": "The Receptive",
+    "chinese": "坤",
+    "number": 2,
+    "trigrams": ["earth", "earth"],
+    "lines": [0, 0, 0, 0, 0, 0],
+    "unicode": "䷁"
+  },
+  "3": {
+    "name": "Difficulty at the Beginning",
+    "chinese": "屯",
+    "number": 3,
+    "trigrams": ["water", "thunder"],
+    "lines": [1, 0, 0, 0, 1, 0],
+    "unicode": "䷂"
+  },
+  "4": {
+    "name": "Youthful Folly",
+    "chinese": "蒙",
+    "number": 4,
+    "trigrams": ["mountain", "water"],
+    "lines": [1, 0, 0, 0, 0, 1],
+    "unicode": "䷃"
+  },
+  "5": {
+    "name": "Waiting",
+    "chinese": "需",
+    "number": 5,
+    "trigrams": ["water", "heaven"],
+    "lines": [1, 1, 1, 0, 1, 0],
+    "unicode": "䷄"
+  },
+  "6": {
+    "name": "Conflict",
+    "chinese": "訟",
+    "number": 6,
+    "trigrams": ["heaven", "water"],
+    "lines": [0, 1, 0, 1, 1, 1],
+    "unicode": "䷅"
+  },
+  "7": {
+    "name": "The Army",
+    "chinese": "師",
+    "number": 7,
+    "trigrams": ["earth", "water"],
+    "lines": [0, 1, 0, 0, 0, 0],
+    "unicode": "䷆"
+  },
+  "8": {
+    "name": "Holding Together",
+    "chinese": "比",
+    "number": 8,
+    "trigrams": ["water", "earth"],
+    "lines": [0, 0, 0, 0, 1, 0],
+    "unicode": "䷇"
+  },
+  "9": {
+    "name": "The Taming Power of the Small",
+    "chinese": "小畜",
+    "number": 9,
+    "trigrams": ["wind", "heaven"],
+    "lines": [1, 1, 1, 0, 1, 1],
+    "unicode": "䷈"
+  },
+  "10": {
+    "name": "Treading",
+    "chinese": "履",
+    "number": 10,
+    "trigrams": ["heaven", "lake"],
+    "lines": [0, 1, 1, 1, 1, 1],
+    "unicode": "䷉"
+  },
+  "11": {
+    "name": "Peace",
+    "chinese": "泰",
+    "number": 11,
+    "trigrams": ["earth", "heaven"],
+    "lines": [1, 1, 1, 0, 0, 0],
+    "unicode": "䷊"
+  },
+  "12": {
+    "name": "Standstill",
+    "chinese": "否",
+    "number": 12,
+    "trigrams": ["heaven", "earth"],
+    "lines": [0, 0, 0, 1, 1, 1],
+    "unicode": "䷋"
+  },
+  "13": {
+    "name": "Fellowship with Men",
+    "chinese": "同人",
+    "number": 13,
+    "trigrams": ["heaven", "fire"],
+    "lines": [1, 0, 1, 1, 1, 1],
+    "unicode": "䷌"
+  },
+  "14": {
+    "name": "Possession in Great Measure",
+    "chinese": "大有",
+    "number": 14,
+    "trigrams": ["fire", "heaven"],
+    "lines": [1, 1, 1, 1, 0, 1],
+    "unicode": "䷍"
+  },
+  "15": {
+    "name": "Modesty",
+    "chinese": "謙",
+    "number": 15,
+    "trigrams": ["earth", "mountain"],
+    "lines": [0, 0, 1, 0, 0, 0],
+    "unicode": "䷎"
+  },
+  "16": {
+    "name": "Enthusiasm",
+    "chinese": "豫",
+    "number": 16,
+    "trigrams": ["thunder", "earth"],
+    "lines": [0, 0, 0, 1, 0, 0],
+    "unicode": "䷏"
+  },
+  "17": {
+    "name": "Following",
+    "chinese": "隨",
+    "number": 17,
+    "trigrams": ["lake", "thunder"],
+    "lines": [1, 0, 0, 0, 1, 1],
+    "unicode": "䷐"
+  },
+  "18": {
+    "name": "Work on What Has Been Spoiled",
+    "chinese": "蠱",
+    "number": 18,
+    "trigrams": ["mountain", "wind"],
+    "lines": [0, 1, 1, 0, 0, 1],
+    "unicode": "䷑"
+  },
+  "19": {
+    "name": "Approach",
+    "chinese": "臨",
+    "number": 19,
+    "trigrams": ["earth", "lake"],
+    "lines": [0, 1, 1, 0, 0, 0],
+    "unicode": "䷒"
+  },
+  "20": {
+    "name": "Contemplation",
+    "chinese": "觀",
+    "number": 20,
+    "trigrams": ["wind", "earth"],
+    "lines": [0, 0, 0, 0, 1, 1],
+    "unicode": "䷓"
+  },
+  "21": {
+    "name": "Biting Through",
+    "chinese": "噬嗑",
+    "number": 21,
+    "trigrams": ["fire", "thunder"],
+    "lines": [1, 0, 0, 1, 0, 1],
+    "unicode": "䷔"
+  },
+  "22": {
+    "name": "Grace",
+    "chinese": "賁",
+    "number": 22,
+    "trigrams": ["mountain", "fire"],
+    "lines": [1, 0, 1, 0, 0, 1],
+    "unicode": "䷕"
+  },
+  "23": {
+    "name": "Splitting Apart",
+    "chinese": "剝",
+    "number": 23,
+    "trigrams": ["mountain", "earth"],
+    "lines": [0, 0, 0, 0, 0, 1],
+    "unicode": "䷖"
+  },
+  "24": {
+    "name": "Return",
+    "chinese": "復",
+    "number": 24,
+    "trigrams": ["earth", "thunder"],
+    "lines": [1, 0, 0, 0, 0, 0],
+    "unicode": "䷗"
+  },
+  "25": {
+    "name": "Innocence",
+    "chinese": "無妄",
+    "number": 25,
+    "trigrams": ["heaven", "thunder"],
+    "lines": [1, 0, 0, 1, 1, 1],
+    "unicode": "䷘"
+  },
+  "26": {
+    "name": "The Taming Power of the Great",
+    "chinese": "大畜",
+    "number": 26,
+    "trigrams": ["mountain", "heaven"],
+    "lines": [1, 1, 1, 0, 0, 1],
+    "unicode": "䷙"
+  },
+  "27": {
+    "name": "The Corners of the Mouth",
+    "chinese": "頤",
+    "number": 27,
+    "trigrams": ["mountain", "thunder"],
+    "lines": [1, 0, 0, 0, 0, 1],
+    "unicode": "䷚"
+  },
+  "28": {
+    "name": "Preponderance of the Great",
+    "chinese": "大過",
+    "number": 28,
+    "trigrams": ["lake", "wind"],
+    "lines": [0, 1, 1, 1, 1, 0],
+    "unicode": "䷛"
+  },
+  "29": {
+    "name": "The Abysmal",
+    "chinese": "坎",
+    "number": 29,
+    "trigrams": ["water", "water"],
+    "lines": [0, 1, 0, 0, 1, 0],
+    "unicode": "䷜"
+  },
+  "30": {
+    "name": "The Clinging",
+    "chinese": "離",
+    "number": 30,
+    "trigrams": ["fire", "fire"],
+    "lines": [1, 0, 1, 1, 0, 1],
+    "unicode": "䷝"
+  },
+  "31": {
+    "name": "Influence",
+    "chinese": "咸",
+    "number": 31,
+    "trigrams": ["lake", "mountain"],
+    "lines": [0, 0, 1, 0, 1, 1],
+    "unicode": "䷞"
+  },
+  "32": {
+    "name": "Duration",
+    "chinese": "恆",
+    "number": 32,
+    "trigrams": ["thunder", "wind"],
+    "lines": [0, 1, 1, 1, 0, 0],
+    "unicode": "䷟"
+  },
+  "33": {
+    "name": "Retreat",
+    "chinese": "遯",
+    "number": 33,
+    "trigrams": ["heaven", "mountain"],
+    "lines": [0, 0, 1, 1, 1, 1],
+    "unicode": "䷠"
+  },
+  "34": {
+    "name": "The Power of the Great",
+    "chinese": "大壯",
+    "number": 34,
+    "trigrams": ["thunder", "heaven"],
+    "lines": [1, 1, 1, 1, 0, 0],
+    "unicode": "䷡"
+  },
+  "35": {
+    "name": "Progress",
+    "chinese": "晉",
+    "number": 35,
+    "trigrams": ["fire", "earth"],
+    "lines": [0, 0, 0, 1, 0, 1],
+    "unicode": "䷢"
+  },
+  "36": {
+    "name": "Darkening of the Light",
+    "chinese": "明夷",
+    "number": 36,
+    "trigrams": ["earth", "fire"],
+    "lines": [1, 0, 1, 0, 0, 0],
+    "unicode": "䷣"
+  },
+  "37": {
+    "name": "The Family",
+    "chinese": "家人",
+    "number": 37,
+    "trigrams": ["wind", "fire"],
+    "lines": [1, 0, 1, 0, 1, 1],
+    "unicode": "䷤"
+  },
+  "38": {
+    "name": "Opposition",
+    "chinese": "睽",
+    "number": 38,
+    "trigrams": ["fire", "lake"],
+    "lines": [0, 1, 1, 1, 0, 1],
+    "unicode": "䷥"
+  },
+  "39": {
+    "name": "Obstruction",
+    "chinese": "蹇",
+    "number": 39,
+    "trigrams": ["water", "mountain"],
+    "lines": [0, 0, 1, 0, 1, 0],
+    "unicode": "䷦"
+  },
+  "40": {
+    "name": "Deliverance",
+    "chinese": "解",
+    "number": 40,
+    "trigrams": ["thunder", "water"],
+    "lines": [0, 1, 0, 1, 0, 0],
+    "unicode": "䷧"
+  },
+  "41": {
+    "name": "Decrease",
+    "chinese": "損",
+    "number": 41,
+    "trigrams": ["mountain", "lake"],
+    "lines": [0, 1, 1, 0, 0, 1],
+    "unicode": "䷨"
+  },
+  "42": {
+    "name": "Increase",
+    "chinese": "益",
+    "number": 42,
+    "trigrams": ["wind", "thunder"],
+    "lines": [1, 0, 0, 0, 1, 1],
+    "unicode": "䷩"
+  },
+  "43": {
+    "name": "Breakthrough",
+    "chinese": "夬",
+    "number": 43,
+    "trigrams": ["lake", "heaven"],
+    "lines": [1, 1, 1, 0, 1, 1],
+    "unicode": "䷪"
+  },
+  "44": {
+    "name": "Coming to Meet",
+    "chinese": "姤",
+    "number": 44,
+    "trigrams": ["heaven", "wind"],
+    "lines": [0, 1, 1, 1, 1, 1],
+    "unicode": "䷫"
+  },
+  "45": {
+    "name": "Gathering Together",
+    "chinese": "萃",
+    "number": 45,
+    "trigrams": ["lake", "earth"],
+    "lines": [0, 0, 0, 0, 1, 1],
+    "unicode": "䷬"
+  },
+  "46": {
+    "name": "Pushing Upward",
+    "chinese": "升",
+    "number": 46,
+    "trigrams": ["earth", "wind"],
+    "lines": [0, 1, 1, 0, 0, 0],
+    "unicode": "䷭"
+  },
+  "47": {
+    "name": "Oppression",
+    "chinese": "困",
+    "number": 47,
+    "trigrams": ["lake", "water"],
+    "lines": [0, 1, 0, 0, 1, 1],
+    "unicode": "䷮"
+  },
+  "48": {
+    "name": "The Well",
+    "chinese": "井",
+    "number": 48,
+    "trigrams": ["water", "wind"],
+    "lines": [0, 1, 1, 0, 1, 0],
+    "unicode": "䷯"
+  },
+  "49": {
+    "name": "Revolution",
+    "chinese": "革",
+    "number": 49,
+    "trigrams": ["lake", "fire"],
+    "lines": [1, 0, 1, 0, 1, 1],
+    "unicode": "䷰"
+  },
+  "50": {
+    "name": "The Caldron",
+    "chinese": "鼎",
+    "number": 50,
+    "trigrams": ["fire", "wind"],
+    "lines": [0, 1, 1, 1, 0, 1],
+    "unicode": "䷱"
+  },
+  "51": {
+    "name": "The Arousing",
+    "chinese": "震",
+    "number": 51,
+    "trigrams": ["thunder", "thunder"],
+    "lines": [1, 0, 0, 1, 0, 0],
+    "unicode": "䷲"
+  },
+  "52": {
+    "name": "Keeping Still",
+    "chinese": "艮",
+    "number": 52,
+    "trigrams": ["mountain", "mountain"],
+    "lines": [0, 0, 1, 0, 0, 1],
+    "unicode": "䷳"
+  },
+  "53": {
+    "name": "Development",
+    "chinese": "漸",
+    "number": 53,
+    "trigrams": ["wind", "mountain"],
+    "lines": [0, 0, 1, 0, 1, 1],
+    "unicode": "䷴"
+  },
+  "54": {
+    "name": "The Marrying Maiden",
+    "chinese": "歸妹",
+    "number": 54,
+    "trigrams": ["thunder", "lake"],
+    "lines": [0, 1, 1, 1, 0, 0],
+    "unicode": "䷵"
+  },
+  "55": {
+    "name": "Abundance",
+    "chinese": "豐",
+    "number": 55,
+    "trigrams": ["thunder", "fire"],
+    "lines": [1, 0, 1, 1, 0, 0],
+    "unicode": "䷶"
+  },
+  "56": {
+    "name": "The Wanderer",
+    "chinese": "旅",
+    "number": 56,
+    "trigrams": ["fire", "mountain"],
+    "lines": [0, 0, 1, 1, 0, 1],
+    "unicode": "䷷"
+  },
+  "57": {
+    "name": "The Gentle",
+    "chinese": "巽",
+    "number": 57,
+    "trigrams": ["wind", "wind"],
+    "lines": [0, 1, 1, 0, 1, 1],
+    "unicode": "䷸"
+  },
+  "58": {
+    "name": "The Joyous",
+    "chinese": "兌",
+    "number": 58,
+    "trigrams": ["lake", "lake"],
+    "lines": [0, 1, 1, 0, 1, 1],
+    "unicode": "䷹"
+  },
+  "59": {
+    "name": "Dispersion",
+    "chinese": "渙",
+    "number": 59,
+    "trigrams": ["wind", "water"],
+    "lines": [0, 1, 0, 0, 1, 1],
+    "unicode": "䷺"
+  },
+  "60": {
+    "name": "Limitation",
+    "chinese": "節",
+    "number": 60,
+    "trigrams": ["water", "lake"],
+    "lines": [0, 1, 1, 0, 1, 0],
+    "unicode": "䷻"
+  },
+  "61": {
+    "name": "Inner Truth",
+    "chinese": "中孚",
+    "number": 61,
+    "trigrams": ["wind", "lake"],
+    "lines": [0, 1, 1, 0, 0, 1],
+    "unicode": "䷼"
+  },
+  "62": {
+    "name": "Preponderance of the Small",
+    "chinese": "小過",
+    "number": 62,
+    "trigrams": ["thunder", "mountain"],
+    "lines": [0, 0, 1, 1, 0, 0],
+    "unicode": "䷽"
+  },
+  "63": {
+    "name": "After Completion",
+    "chinese": "既濟",
+    "number": 63,
+    "trigrams": ["water", "fire"],
+    "lines": [1, 0, 1, 0, 1, 0],
+    "unicode": "䷾"
+  },
+  "64": {
+    "name": "Before Completion",
+    "chinese": "未濟",
+    "number": 64,
+    "trigrams": ["fire", "water"],
+    "lines": [0, 1, 0, 1, 0, 1],
+    "unicode": "䷿"
+  }
+}

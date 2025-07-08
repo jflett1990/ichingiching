@@ -1,0 +1,475 @@
+/* ===== LIQUID GLASS GRADIENT ANIMATIONS ===== */
+
+/* Flowing gradient animation */
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Gradient wave animation */
+@keyframes gradient-wave {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Gradient shift animation */
+@keyframes gradient-shift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Gradient pulse animation */
+@keyframes gradient-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* ===== LIQUID GLASS GRADIENT CLASSES ===== */
+
+.gradient-flowing {
+  background: linear-gradient(
+    -45deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-accent),
+    var(--color-primary)
+  );
+  background-size: 400% 400%;
+  animation: gradient-flow 8s ease infinite;
+}
+
+.gradient-wave {
+  background: linear-gradient(
+    45deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-accent),
+    var(--color-primary)
+  );
+  background-size: 200% 200%;
+  animation: gradient-wave 6s ease-in-out infinite;
+}
+
+.gradient-shifting {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  animation: gradient-shift 10s linear infinite;
+}
+
+.gradient-pulsing {
+  background: var(--gradient-primary);
+  animation: gradient-pulse 3s ease-in-out infinite;
+}
+
+/* ===== GLASS MORPHING ANIMATIONS ===== */
+
+@keyframes glass-morph {
+  0% {
+    border-radius: 20px;
+    transform: scale(1) rotate(0deg);
+  }
+  33% {
+    border-radius: 30px 10px 30px 10px;
+    transform: scale(1.02) rotate(1deg);
+  }
+  66% {
+    border-radius: 10px 30px 10px 30px;
+    transform: scale(1.01) rotate(-1deg);
+  }
+  100% {
+    border-radius: 20px;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes glass-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.95;
+  }
+}
+
+@keyframes glass-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.glass-morphing {
+  animation: glass-morph 8s ease-in-out infinite;
+}
+
+.glass-breathing {
+  animation: glass-breathe 4s ease-in-out infinite;
+}
+
+.glass-floating {
+  animation: glass-float 6s ease-in-out infinite;
+}
+
+/* ===== PARTICLE SYSTEM BASE ===== */
+
+.particle-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ===== FLOATING PARTICLES ===== */
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.particle-floating {
+  width: 4px;
+  height: 4px;
+  background: var(--color-primary);
+  animation: particle-float 8s linear infinite;
+}
+
+.particle-floating:nth-child(2n) {
+  width: 6px;
+  height: 6px;
+  background: var(--color-secondary);
+  animation-duration: 10s;
+  animation-delay: -2s;
+}
+
+.particle-floating:nth-child(3n) {
+  width: 3px;
+  height: 3px;
+  background: var(--color-accent);
+  animation-duration: 12s;
+  animation-delay: -4s;
+}
+
+/* ===== GLASS SHIMMER PARTICLES ===== */
+
+@keyframes shimmer-particle {
+  0% {
+    transform: translateX(-100px) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100px) scale(0);
+    opacity: 0;
+  }
+}
+
+.particle-shimmer {
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(
+    0deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  border-radius: 1px;
+  animation: shimmer-particle 3s ease-in-out infinite;
+}
+
+/* ===== ORBITAL PARTICLES ===== */
+
+@keyframes particle-orbit {
+  0% {
+    transform: rotate(0deg) translateX(50px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(50px) rotate(-360deg);
+  }
+}
+
+.particle-orbital {
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  animation: particle-orbit 20s linear infinite;
+}
+
+.particle-orbital:nth-child(2n) {
+  animation-duration: 25s;
+  animation-delay: -5s;
+  background: var(--color-secondary);
+}
+
+.particle-orbital:nth-child(3n) {
+  animation-duration: 30s;
+  animation-delay: -10s;
+  background: var(--color-accent);
+}
+
+/* ===== BUBBLE PARTICLES ===== */
+
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+    transform: translateY(90vh) scale(0.5);
+  }
+  90% {
+    opacity: 0.8;
+    transform: translateY(10vh) scale(1);
+  }
+  100% {
+    transform: translateY(0) scale(0);
+    opacity: 0;
+  }
+}
+
+.particle-bubble {
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.2)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: bubble-rise 12s ease-in-out infinite;
+}
+
+.particle-bubble:nth-child(2n) {
+  width: 8px;
+  height: 8px;
+  animation-duration: 10s;
+  animation-delay: -3s;
+}
+
+.particle-bubble:nth-child(3n) {
+  width: 16px;
+  height: 16px;
+  animation-duration: 15s;
+  animation-delay: -7s;
+}
+
+/* ===== GLASS SHARD PARTICLES ===== */
+
+@keyframes shard-drift {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+.particle-shard {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 8px solid var(--color-primary);
+  animation: shard-drift 14s linear infinite;
+}
+
+.particle-shard:nth-child(2n) {
+  border-bottom-color: var(--color-secondary);
+  animation-duration: 16s;
+  animation-delay: -4s;
+}
+
+.particle-shard:nth-child(3n) {
+  border-bottom-color: var(--color-accent);
+  animation-duration: 18s;
+  animation-delay: -8s;
+}
+
+/* ===== LIGHT RAYS ===== */
+
+@keyframes light-ray {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(100vw) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.light-ray {
+  position: absolute;
+  width: 2px;
+  height: 100vh;
+  background: linear-gradient(
+    0deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  animation: light-ray 8s ease-in-out infinite;
+}
+
+.light-ray:nth-child(2n) {
+  animation-delay: -2s;
+  animation-duration: 10s;
+}
+
+.light-ray:nth-child(3n) {
+  animation-delay: -4s;
+  animation-duration: 12s;
+}
+
+/* ===== GLASS PRISM EFFECTS ===== */
+
+@keyframes prism-refract {
+  0% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  33% {
+    filter: hue-rotate(120deg) brightness(1.2);
+  }
+  66% {
+    filter: hue-rotate(240deg) brightness(1.1);
+  }
+  100% {
+    filter: hue-rotate(360deg) brightness(1);
+  }
+}
+
+.prism-effect {
+  animation: prism-refract 6s ease-in-out infinite;
+}
+
+/* ===== RESPONSIVE OPTIMIZATIONS ===== */
+
+@media (max-width: 768px) {
+  .particle-container {
+    display: none; /* Hide particles on mobile for performance */
+  }
+  
+  .gradient-flowing,
+  .gradient-wave,
+  .gradient-shifting {
+    animation-duration: 4s; /* Faster animations on mobile */
+  }
+  
+  .glass-morphing {
+    animation: glass-breathe 4s ease-in-out infinite; /* Simpler animation */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-flowing,
+  .gradient-wave,
+  .gradient-shifting,
+  .gradient-pulsing,
+  .glass-morphing,
+  .glass-breathing,
+  .glass-floating,
+  .particle-floating,
+  .particle-shimmer,
+  .particle-orbital,
+  .particle-bubble,
+  .particle-shard,
+  .light-ray,
+  .prism-effect {
+    animation: none !important;
+  }
+  
+  .particle-container {
+    display: none !important;
+  }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+.particle,
+.light-ray {
+  will-change: transform, opacity;
+}
+
+.gradient-flowing,
+.gradient-wave,
+.gradient-shifting,
+.gradient-pulsing {
+  will-change: background-position, filter;
+}
+
+.glass-morphing,
+.glass-breathing,
+.glass-floating {
+  will-change: transform, border-radius;
+}

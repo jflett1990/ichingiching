@@ -1,0 +1,82 @@
+{
+  "heaven": {
+    "name": "Heaven",
+    "chinese": "乾",
+    "number": 1,
+    "value": 7,
+    "lines": [1, 1, 1],
+    "attributes": ["creative", "active", "strength", "leadership"],
+    "element": "metal",
+    "direction": "northwest"
+  },
+  "earth": {
+    "name": "Earth",
+    "chinese": "坤",
+    "number": 2,
+    "value": 8,
+    "lines": [0, 0, 0],
+    "attributes": ["receptive", "yielding", "nurturing", "support"],
+    "element": "earth",
+    "direction": "southwest"
+  },
+  "thunder": {
+    "name": "Thunder",
+    "chinese": "震",
+    "number": 3,
+    "value": 4,
+    "lines": [1, 0, 0],
+    "attributes": ["movement", "initiative", "arousing", "action"],
+    "element": "wood",
+    "direction": "east"
+  },
+  "wind": {
+    "name": "Wind",
+    "chinese": "巽",
+    "number": 4,
+    "value": 5,
+    "lines": [0, 1, 1],
+    "attributes": ["gentle", "penetrating", "flexible", "gradual"],
+    "element": "wood",
+    "direction": "southeast"
+  },
+  "water": {
+    "name": "Water",
+    "chinese": "坎",
+    "number": 5,
+    "value": 6,
+    "lines": [0, 1, 0],
+    "attributes": ["danger", "depth", "flow", "wisdom"],
+    "element": "water",
+    "direction": "north"
+  },
+  "fire": {
+    "name": "Fire",
+    "chinese": "離",
+    "number": 6,
+    "value": 3,
+    "lines": [1, 0, 1],
+    "attributes": ["clarity", "illumination", "beauty", "consciousness"],
+    "element": "fire",
+    "direction": "south"
+  },
+  "mountain": {
+    "name": "Mountain",
+    "chinese": "艮",
+    "number": 7,
+    "value": 1,
+    "lines": [0, 0, 1],
+    "attributes": ["stillness", "meditation", "boundaries", "reflection"],
+    "element": "earth",
+    "direction": "northeast"
+  },
+  "lake": {
+    "name": "Lake",
+    "chinese": "兌",
+    "number": 8,
+    "value": 2,
+    "lines": [0, 1, 1],
+    "attributes": ["joy", "pleasure", "communication", "openness"],
+    "element": "metal",
+    "direction": "west"
+  }
+}
