@@ -1,231 +1,316 @@
 import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import { useAppState } from '../../store/AppStateProvider';
-import themeData from '../../data/themes.json';
 
-// Advanced theme interface extending the base theme data
-interface Theme {
+// Apple Design System Theme Interface
+interface AppleTheme {
   name: string;
   description: string;
+  key: string;
   isPremium: boolean;
   colors: {
-    primary: string;
-    secondary: string;
-    accent: string;
-    background: string;
-    backgroundSecondary: string;
-    text: string;
+    // Apple Intelligence Colors
+    aiBlue: string;
+    aiPurple: string;
+    aiPink: string;
+    aiOrange: string;
+    
+    // iOS System Colors
+    systemBlue: string;
+    systemGreen: string;
+    systemRed: string;
+    systemOrange: string;
+    systemYellow: string;
+    systemPink: string;
+    systemPurple: string;
+    systemTeal: string;
+    
+    // System Backgrounds
+    systemBackground: string;
+    systemBackgroundDark: string;
+    systemSurface: string;
+    systemSurfaceDark: string;
+    
+    // Text Colors
+    textPrimary: string;
     textSecondary: string;
-    textLight: string;
-    glass: string;
-    glassHover: string;
+    textPrimaryDark: string;
+    textSecondaryDark: string;
+    
+    // Glass Colors
+    glassLight: string;
+    glassDark: string;
     glassBorder: string;
-    shadow: string;
-    shadowHeavy: string;
+    glassBorderDark: string;
   };
   gradients: {
-    primary: string;
-    secondary: string;
-    glass: string;
-    background: string;
+    aiPrimary: string;
+    aiBluePurple: string;
+    aiPurplePink: string;
+    aiPinkOrange: string;
+    systemBackground: string;
   };
-  typography: {
-    primary: string;
-    secondary: string;
-    sizes: Record<string, string>;
-    weights: Record<string, string>;
-  };
-  animations: {
-    duration: {
-      fast: string;
-      normal: string;
-      slow: string;
-    };
-    easing: {
-      smooth: string;
-      bounce: string;
-      ease: string;
-    };
-  };
-  spacing: Record<string, string>;
-  borderRadius: Record<string, string>;
   effects: {
-    blur: string;
-    glowIntensity: string;
-    particleCount: number;
-    [key: string]: any; // Allow for theme-specific effects
+    glassBlur: string;
+    glassShadow: string;
+    glassShadowDark: string;
   };
 }
 
-interface ThemeContextType {
-  currentTheme: Theme;
-  availableThemes: Theme[];
+interface AppleThemeContextType {
+  currentTheme: AppleTheme;
+  availableThemes: AppleTheme[];
   isLoading: boolean;
   setTheme: (themeName: string) => void;
-  preloadTheme: (themeName: string) => Promise<void>;
-  getThemePreview: (themeName: string) => Theme | null;
   isDarkMode: boolean;
   toggleDarkMode: () => void;
-  customizations: ThemeCustomizations;
-  updateCustomizations: (customizations: Partial<ThemeCustomizations>) => void;
+  preloadTheme: (themeName: string) => Promise<void>;
 }
 
-interface ThemeCustomizations {
-  primaryColor?: string;
-  accentColor?: string;
-  backgroundOpacity?: number;
-  glassIntensity?: number;
-  animationSpeed?: number;
-  borderRadius?: number;
-}
+const AppleThemeContext = createContext<AppleThemeContextType | null>(null);
 
-const ThemeContext = createContext<ThemeContextType | null>(null);
+// Apple Design System Themes
+const appleThemes: AppleTheme[] = [
+  {
+    name: 'Apple Light',
+    description: 'Classic Apple design with light system colors',
+    key: 'apple-light',
+    isPremium: false,
+    colors: {
+      // Apple Intelligence Colors
+      aiBlue: '#5AC8FA',
+      aiPurple: '#5856D6',
+      aiPink: '#FF2D55',
+      aiOrange: '#FF9500',
+      
+      // iOS System Colors
+      systemBlue: '#007AFF',
+      systemGreen: '#4CD964',
+      systemRed: '#FF3B30',
+      systemOrange: '#FF9500',
+      systemYellow: '#FFCC00',
+      systemPink: '#FF2D55',
+      systemPurple: '#5856D6',
+      systemTeal: '#5AC8FA',
+      
+      // System Backgrounds
+      systemBackground: '#F2F2F7',
+      systemBackgroundDark: '#000000',
+      systemSurface: '#FFFFFF',
+      systemSurfaceDark: '#1C1C1E',
+      
+      // Text Colors
+      textPrimary: 'rgba(0, 0, 0, 0.8)',
+      textSecondary: 'rgba(0, 0, 0, 0.6)',
+      textPrimaryDark: 'rgba(255, 255, 255, 0.9)',
+      textSecondaryDark: 'rgba(255, 255, 255, 0.7)',
+      
+      // Glass Colors
+      glassLight: 'rgba(255, 255, 255, 0.8)',
+      glassDark: 'rgba(0, 0, 0, 0.7)',
+      glassBorder: 'rgba(255, 255, 255, 0.2)',
+      glassBorderDark: 'rgba(255, 255, 255, 0.1)',
+    },
+    gradients: {
+      aiPrimary: 'linear-gradient(135deg, #5AC8FA 0%, #5856D6 25%, #FF2D55 75%, #FF9500 100%)',
+      aiBluePurple: 'linear-gradient(135deg, #5AC8FA 0%, #5856D6 100%)',
+      aiPurplePink: 'linear-gradient(135deg, #5856D6 0%, #FF2D55 100%)',
+      aiPinkOrange: 'linear-gradient(135deg, #FF2D55 0%, #FF9500 100%)',
+      systemBackground: 'linear-gradient(135deg, #F2F2F7 0%, #E5E5EA 100%)',
+    },
+    effects: {
+      glassBlur: '20px',
+      glassShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+      glassShadowDark: '0 8px 32px rgba(0, 0, 0, 0.3)',
+    },
+  },
+  {
+    name: 'Apple Dark',
+    description: 'Apple design with dark mode styling',
+    key: 'apple-dark',
+    isPremium: false,
+    colors: {
+      // Apple Intelligence Colors
+      aiBlue: '#5AC8FA',
+      aiPurple: '#5856D6',
+      aiPink: '#FF2D55',
+      aiOrange: '#FF9500',
+      
+      // iOS System Colors
+      systemBlue: '#007AFF',
+      systemGreen: '#4CD964',
+      systemRed: '#FF3B30',
+      systemOrange: '#FF9500',
+      systemYellow: '#FFCC00',
+      systemPink: '#FF2D55',
+      systemPurple: '#5856D6',
+      systemTeal: '#5AC8FA',
+      
+      // System Backgrounds
+      systemBackground: '#000000',
+      systemBackgroundDark: '#000000',
+      systemSurface: '#1C1C1E',
+      systemSurfaceDark: '#1C1C1E',
+      
+      // Text Colors
+      textPrimary: 'rgba(255, 255, 255, 0.9)',
+      textSecondary: 'rgba(255, 255, 255, 0.7)',
+      textPrimaryDark: 'rgba(255, 255, 255, 0.9)',
+      textSecondaryDark: 'rgba(255, 255, 255, 0.7)',
+      
+      // Glass Colors
+      glassLight: 'rgba(0, 0, 0, 0.7)',
+      glassDark: 'rgba(0, 0, 0, 0.7)',
+      glassBorder: 'rgba(255, 255, 255, 0.1)',
+      glassBorderDark: 'rgba(255, 255, 255, 0.1)',
+    },
+    gradients: {
+      aiPrimary: 'linear-gradient(135deg, #5AC8FA 0%, #5856D6 25%, #FF2D55 75%, #FF9500 100%)',
+      aiBluePurple: 'linear-gradient(135deg, #5AC8FA 0%, #5856D6 100%)',
+      aiPurplePink: 'linear-gradient(135deg, #5856D6 0%, #FF2D55 100%)',
+      aiPinkOrange: 'linear-gradient(135deg, #FF2D55 0%, #FF9500 100%)',
+      systemBackground: 'linear-gradient(135deg, #000000 0%, #1C1C1E 100%)',
+    },
+    effects: {
+      glassBlur: '20px',
+      glassShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+      glassShadowDark: '0 8px 32px rgba(0, 0, 0, 0.3)',
+    },
+  },
+  {
+    name: 'Apple Intelligence',
+    description: 'Apple Intelligence themed with AI gradients',
+    key: 'apple-intelligence',
+    isPremium: true,
+    colors: {
+      // Apple Intelligence Colors
+      aiBlue: '#5AC8FA',
+      aiPurple: '#5856D6',
+      aiPink: '#FF2D55',
+      aiOrange: '#FF9500',
+      
+      // iOS System Colors
+      systemBlue: '#007AFF',
+      systemGreen: '#4CD964',
+      systemRed: '#FF3B30',
+      systemOrange: '#FF9500',
+      systemYellow: '#FFCC00',
+      systemPink: '#FF2D55',
+      systemPurple: '#5856D6',
+      systemTeal: '#5AC8FA',
+      
+      // System Backgrounds
+      systemBackground: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      systemBackgroundDark: 'linear-gradient(135deg, #2D1B69 0%, #11998E 100%)',
+      systemSurface: 'rgba(255, 255, 255, 0.1)',
+      systemSurfaceDark: 'rgba(0, 0, 0, 0.3)',
+      
+      // Text Colors
+      textPrimary: 'white',
+      textSecondary: 'rgba(255, 255, 255, 0.8)',
+      textPrimaryDark: 'white',
+      textSecondaryDark: 'rgba(255, 255, 255, 0.8)',
+      
+      // Glass Colors
+      glassLight: 'rgba(255, 255, 255, 0.2)',
+      glassDark: 'rgba(0, 0, 0, 0.3)',
+      glassBorder: 'rgba(255, 255, 255, 0.3)',
+      glassBorderDark: 'rgba(255, 255, 255, 0.2)',
+    },
+    gradients: {
+      aiPrimary: 'linear-gradient(135deg, #5AC8FA 0%, #5856D6 25%, #FF2D55 75%, #FF9500 100%)',
+      aiBluePurple: 'linear-gradient(135deg, #5AC8FA 0%, #5856D6 100%)',
+      aiPurplePink: 'linear-gradient(135deg, #5856D6 0%, #FF2D55 100%)',
+      aiPinkOrange: 'linear-gradient(135deg, #FF2D55 0%, #FF9500 100%)',
+      systemBackground: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    },
+    effects: {
+      glassBlur: '30px',
+      glassShadow: '0 12px 40px rgba(90, 200, 250, 0.3)',
+      glassShadowDark: '0 12px 40px rgba(90, 200, 250, 0.3)',
+    },
+  },
+];
 
-// Theme processing utilities
-const processThemeData = (rawTheme: any): Theme => ({
-  ...rawTheme,
-  // Ensure all required properties exist with fallbacks
-  colors: {
-    primary: rawTheme.colors?.primary || '#667eea',
-    secondary: rawTheme.colors?.secondary || '#764ba2',
-    accent: rawTheme.colors?.accent || '#f093fb',
-    background: rawTheme.colors?.background || '#f7fafc',
-    backgroundSecondary: rawTheme.colors?.backgroundSecondary || '#edf2f7',
-    text: rawTheme.colors?.text || '#2d3748',
-    textSecondary: rawTheme.colors?.textSecondary || '#4a5568',
-    textLight: rawTheme.colors?.textLight || '#a0aec0',
-    glass: rawTheme.colors?.glass || 'rgba(255, 255, 255, 0.1)',
-    glassHover: rawTheme.colors?.glassHover || 'rgba(255, 255, 255, 0.2)',
-    glassBorder: rawTheme.colors?.glassBorder || 'rgba(255, 255, 255, 0.2)',
-    shadow: rawTheme.colors?.shadow || 'rgba(0, 0, 0, 0.1)',
-    shadowHeavy: rawTheme.colors?.shadowHeavy || 'rgba(0, 0, 0, 0.25)',
-    ...rawTheme.colors,
-  },
-  gradients: {
-    primary: rawTheme.gradients?.primary || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    secondary: rawTheme.gradients?.secondary || 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-    glass: rawTheme.gradients?.glass || 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-    background: rawTheme.gradients?.background || 'linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%)',
-    ...rawTheme.gradients,
-  },
-  effects: {
-    blur: rawTheme.effects?.blur || '20px',
-    glowIntensity: rawTheme.effects?.glowIntensity || '0.5',
-    particleCount: rawTheme.effects?.particleCount || 50,
-    ...rawTheme.effects,
-  },
-});
-
-// Advanced theme provider component
+// Apple Theme Provider Component
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { preferences, updateUserPreferences, user } = useAppState();
   const [isLoading, setIsLoading] = useState(false);
-  const [customizations, setCustomizations] = useState<ThemeCustomizations>({});
-  const [preloadedThemes, setPreloadedThemes] = useState<Map<string, Theme>>(new Map());
-
-  // Process and memoize available themes
-  const availableThemes = useMemo(() => {
-    return Object.entries(themeData).map(([key, theme]) => 
-      processThemeData({ ...theme, key })
-    );
-  }, []);
 
   // Get current theme with fallback
   const currentTheme = useMemo(() => {
-    const themeName = preferences?.theme || 'liquid-glass';
-    const theme = availableThemes.find(t => t.key === themeName) || availableThemes[0];
-    
-    // Apply customizations if any
-    if (Object.keys(customizations).length > 0) {
-      return applyCustomizations(theme, customizations);
-    }
-    
-    return theme;
-  }, [availableThemes, preferences?.theme, customizations]);
+    const themeName = preferences?.theme || 'apple-light';
+    return appleThemes.find(t => t.key === themeName) || appleThemes[0];
+  }, [preferences?.theme]);
 
-  // Dark mode detection
+  // Check if current theme is dark mode
   const isDarkMode = useMemo(() => {
-    const darkThemes = ['cyberpunk', 'art-nouveau'];
-    return darkThemes.includes(currentTheme.key || '');
+    return currentTheme.key === 'apple-dark' || currentTheme.key === 'apple-intelligence';
   }, [currentTheme]);
 
   // Apply CSS custom properties for the current theme
   useEffect(() => {
     const root = document.documentElement;
     
-    // Set primary theme variables
-    Object.entries(currentTheme.colors).forEach(([key, value]) => {
-      root.style.setProperty(`--color-${key}`, value);
-    });
+    // Apple Intelligence Colors
+    root.style.setProperty('--ai-blue', currentTheme.colors.aiBlue);
+    root.style.setProperty('--ai-purple', currentTheme.colors.aiPurple);
+    root.style.setProperty('--ai-pink', currentTheme.colors.aiPink);
+    root.style.setProperty('--ai-orange', currentTheme.colors.aiOrange);
     
-    Object.entries(currentTheme.gradients).forEach(([key, value]) => {
-      root.style.setProperty(`--gradient-${key}`, value);
-    });
+    // iOS System Colors
+    root.style.setProperty('--ios-blue', currentTheme.colors.systemBlue);
+    root.style.setProperty('--ios-green', currentTheme.colors.systemGreen);
+    root.style.setProperty('--ios-red', currentTheme.colors.systemRed);
+    root.style.setProperty('--ios-orange', currentTheme.colors.systemOrange);
+    root.style.setProperty('--ios-yellow', currentTheme.colors.systemYellow);
+    root.style.setProperty('--ios-pink', currentTheme.colors.systemPink);
+    root.style.setProperty('--ios-purple', currentTheme.colors.systemPurple);
+    root.style.setProperty('--ios-teal', currentTheme.colors.systemTeal);
     
-    Object.entries(currentTheme.spacing).forEach(([key, value]) => {
-      root.style.setProperty(`--spacing-${key}`, value);
-    });
+    // System Colors
+    root.style.setProperty('--system-bg', currentTheme.colors.systemBackground);
+    root.style.setProperty('--system-surface', currentTheme.colors.systemSurface);
+    root.style.setProperty('--adaptive-text-light', currentTheme.colors.textPrimary);
+    root.style.setProperty('--adaptive-text-secondary', currentTheme.colors.textSecondary);
     
-    Object.entries(currentTheme.borderRadius).forEach(([key, value]) => {
-      root.style.setProperty(`--radius-${key}`, value);
-    });
+    // Glass Colors
+    root.style.setProperty('--glass-opacity', '0.8');
+    root.style.setProperty('--glass-blur', currentTheme.effects.glassBlur);
+    root.style.setProperty('--glass-border', currentTheme.colors.glassBorder);
+    root.style.setProperty('--glass-shadow', currentTheme.effects.glassShadow);
     
-    // Set typography variables
-    root.style.setProperty('--font-primary', currentTheme.typography.primary);
-    root.style.setProperty('--font-secondary', currentTheme.typography.secondary);
+    // Gradients
+    root.style.setProperty('--ai-gradient-primary', currentTheme.gradients.aiPrimary);
+    root.style.setProperty('--ai-gradient-blue-purple', currentTheme.gradients.aiBluePurple);
+    root.style.setProperty('--ai-gradient-purple-pink', currentTheme.gradients.aiPurplePink);
+    root.style.setProperty('--ai-gradient-pink-orange', currentTheme.gradients.aiPinkOrange);
     
-    // Set animation variables
-    root.style.setProperty('--duration-fast', currentTheme.animations.duration.fast);
-    root.style.setProperty('--duration-normal', currentTheme.animations.duration.normal);
-    root.style.setProperty('--duration-slow', currentTheme.animations.duration.slow);
-    
-    // Set effect variables
-    root.style.setProperty('--blur-intensity', currentTheme.effects.blur);
-    root.style.setProperty('--glow-intensity', currentTheme.effects.glowIntensity);
-    
-    // Set theme class on body for CSS targeting
-    document.body.className = `theme-${currentTheme.key || 'liquid-glass'}`;
+    // Set theme class on body
+    document.body.className = `theme-${currentTheme.key}`;
     
     // Update meta theme color for mobile browsers
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', currentTheme.colors.primary);
+      metaThemeColor.setAttribute('content', currentTheme.colors.systemBlue);
     } else {
       const meta = document.createElement('meta');
       meta.name = 'theme-color';
-      meta.content = currentTheme.colors.primary;
+      meta.content = currentTheme.colors.systemBlue;
       document.head.appendChild(meta);
+    }
+    
+    // Set background based on theme
+    if (currentTheme.key === 'apple-intelligence') {
+      document.body.style.background = currentTheme.colors.systemBackground;
+    } else {
+      document.body.style.background = currentTheme.colors.systemBackground;
     }
     
   }, [currentTheme]);
 
-  // Preload theme fonts and assets
-  useEffect(() => {
-    const preloadFonts = async () => {
-      const fontsToPreload = [
-        currentTheme.typography.primary,
-        currentTheme.typography.secondary,
-      ];
-      
-      const fontPromises = fontsToPreload.map(font => {
-        if (!font.includes('system') && !font.includes('serif') && !font.includes('sans-serif')) {
-          return document.fonts.load(`1rem "${font.split(',')[0].trim()}"`);
-        }
-        return Promise.resolve();
-      });
-      
-      try {
-        await Promise.all(fontPromises);
-      } catch (error) {
-        console.warn('Font preloading failed:', error);
-      }
-    };
-    
-    preloadFonts();
-  }, [currentTheme.typography]);
-
   // Theme switching function
   const setTheme = async (themeName: string) => {
-    const theme = availableThemes.find(t => t.key === themeName);
+    const theme = appleThemes.find(t => t.key === themeName);
     if (!theme) return;
     
     // Check premium access
@@ -236,19 +321,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setIsLoading(true);
     
     try {
-      // Preload theme if not already cached
-      if (!preloadedThemes.has(themeName)) {
-        await preloadTheme(themeName);
-      }
-      
-      // Update user preferences
-      updateUserPreferences({ theme: themeName });
-      
-      // Animate theme transition
+      // Use View Transition API if available
       if (document.startViewTransition) {
         document.startViewTransition(() => {
-          // Theme change will trigger via preferences update
+          updateUserPreferences({ theme: themeName });
         });
+      } else {
+        updateUserPreferences({ theme: themeName });
       }
       
     } catch (error) {
@@ -259,155 +338,76 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
-  // Preload theme assets
+  // Toggle between light and dark mode
+  const toggleDarkMode = () => {
+    const newTheme = isDarkMode ? 'apple-light' : 'apple-dark';
+    setTheme(newTheme);
+  };
+
+  // Preload theme assets (simplified for Apple themes)
   const preloadTheme = async (themeName: string) => {
-    const theme = availableThemes.find(t => t.key === themeName);
-    if (!theme || preloadedThemes.has(themeName)) return;
+    const theme = appleThemes.find(t => t.key === themeName);
+    if (!theme) return;
     
     try {
-      // Preload theme-specific fonts
-      const fontFamily = theme.typography.primary.split(',')[0].trim();
-      if (!fontFamily.includes('system')) {
-        await document.fonts.load(`1rem "${fontFamily}"`);
-      }
-      
-      // Cache the processed theme
-      setPreloadedThemes(prev => new Map(prev).set(themeName, theme));
-      
+      // Preload Apple system fonts
+      await document.fonts.load('1rem -apple-system');
+      await document.fonts.load('1rem SF Pro Display');
     } catch (error) {
       console.warn(`Theme preloading failed for ${themeName}:`, error);
     }
   };
 
-  // Get theme preview without switching
-  const getThemePreview = (themeName: string): Theme | null => {
-    return availableThemes.find(t => t.key === themeName) || null;
-  };
-
-  // Toggle dark mode (switch between compatible themes)
-  const toggleDarkMode = () => {
-    const currentKey = currentTheme.key || 'liquid-glass';
-    const darkModeMap: Record<string, string> = {
-      'liquid-glass': 'cyberpunk',
-      'cyberpunk': 'liquid-glass',
-      'art-nouveau': 'traditional-zen',
-      'traditional-zen': 'art-nouveau',
-      'pop-art': 'cyberpunk',
-    };
-    
-    const newTheme = darkModeMap[currentKey] || (isDarkMode ? 'liquid-glass' : 'cyberpunk');
-    setTheme(newTheme);
-  };
-
-  // Apply theme customizations
-  const applyCustomizations = (theme: Theme, customizations: ThemeCustomizations): Theme => {
-    const customized = { ...theme };
-    
-    if (customizations.primaryColor) {
-      customized.colors.primary = customizations.primaryColor;
-    }
-    
-    if (customizations.accentColor) {
-      customized.colors.accent = customizations.accentColor;
-    }
-    
-    if (customizations.backgroundOpacity !== undefined) {
-      const opacity = customizations.backgroundOpacity;
-      customized.colors.glass = customized.colors.glass.replace(/[\d.]+\)$/, `${opacity})`);
-    }
-    
-    if (customizations.glassIntensity !== undefined) {
-      customized.effects.blur = `${customizations.glassIntensity * 20}px`;
-    }
-    
-    if (customizations.animationSpeed !== undefined) {
-      const speed = customizations.animationSpeed;
-      customized.animations.duration.fast = `${150 / speed}ms`;
-      customized.animations.duration.normal = `${300 / speed}ms`;
-      customized.animations.duration.slow = `${500 / speed}ms`;
-    }
-    
-    if (customizations.borderRadius !== undefined) {
-      const radius = customizations.borderRadius;
-      Object.keys(customized.borderRadius).forEach(key => {
-        const originalValue = parseFloat(customized.borderRadius[key]);
-        customized.borderRadius[key] = `${originalValue * radius}rem`;
-      });
-    }
-    
-    return customized;
-  };
-
-  // Update customizations
-  const updateCustomizations = (newCustomizations: Partial<ThemeCustomizations>) => {
-    setCustomizations(prev => ({ ...prev, ...newCustomizations }));
-  };
-
   // Context value
-  const contextValue: ThemeContextType = {
+  const contextValue: AppleThemeContextType = {
     currentTheme,
-    availableThemes,
+    availableThemes: appleThemes,
     isLoading,
     setTheme,
-    preloadTheme,
-    getThemePreview,
     isDarkMode,
     toggleDarkMode,
-    customizations,
-    updateCustomizations,
+    preloadTheme,
   };
 
   return (
-    <ThemeContext.Provider value={contextValue}>
+    <AppleThemeContext.Provider value={contextValue}>
       {children}
-    </ThemeContext.Provider>
+    </AppleThemeContext.Provider>
   );
 };
 
-// Hook for using theme context
-export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
+// Hook for using Apple theme context
+export const useTheme = (): AppleThemeContextType => {
+  const context = useContext(AppleThemeContext);
   if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 };
 
-// Utility hooks for specific theme aspects
-export const useThemeColors = () => {
+// Utility hooks for Apple design system
+export const useAppleColors = () => {
   const { currentTheme } = useTheme();
   return currentTheme.colors;
 };
 
-export const useThemeEffects = () => {
+export const useAppleGradients = () => {
+  const { currentTheme } = useTheme();
+  return currentTheme.gradients;
+};
+
+export const useAppleEffects = () => {
   const { currentTheme } = useTheme();
   return currentTheme.effects;
 };
 
-export const useThemeTransition = () => {
-  const { setTheme, isLoading } = useTheme();
-  
-  const switchWithTransition = async (themeName: string) => {
-    if (document.startViewTransition) {
-      document.startViewTransition(async () => {
-        await setTheme(themeName);
-      });
-    } else {
-      await setTheme(themeName);
-    }
-  };
-  
-  return { switchWithTransition, isLoading };
-};
-
 // Premium theme access hook
 export const usePremiumThemes = () => {
-  const { availableThemes } = useTheme();
   const { user } = useAppState();
   
-  const premiumThemes = availableThemes.filter(theme => theme.isPremium);
-  const freeThemes = availableThemes.filter(theme => !theme.isPremium);
-  const accessibleThemes = user?.isPremium ? availableThemes : freeThemes;
+  const premiumThemes = appleThemes.filter(theme => theme.isPremium);
+  const freeThemes = appleThemes.filter(theme => !theme.isPremium);
+  const accessibleThemes = user?.isPremium ? appleThemes : freeThemes;
   
   return {
     premiumThemes,
@@ -417,4 +417,4 @@ export const usePremiumThemes = () => {
   };
 };
 
-export type { Theme, ThemeCustomizations };
+export type { AppleTheme };
