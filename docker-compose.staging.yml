@@ -1,0 +1,117 @@
+version: '3.8'
+
+services:
+  # Staging application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=staging
+      - VITE_API_URL=https://staging-api.wisdom-oracle.app
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.wisdom-oracle.environment=staging"
+      - "com.wisdom-oracle.version=${VERSION:-latest}"
+    profiles:
+      - staging
+
+  # Staging database
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: wisdom_oracle_staging
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-staging_password}
+      POSTGRES_DB: wisdom_oracle_staging_db
+    volumes:
+      - postgres_staging_data:/var/lib/postgresql/data
+      - ./scripts/database/init-staging.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 256M
+    profiles:
+      - staging
+      - db
+
+  # Staging Redis
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 128mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_staging_data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 128M
+    profiles:
+      - staging
+      - cache
+
+  # Monitoring for staging
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus-staging.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_staging_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=7d'
+      - '--web.enable-lifecycle'
+    profiles:
+      - staging
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-staging_grafana}
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - grafana_staging_data:/var/lib/grafana
+      - ./monitoring/grafana-staging-dashboards:/etc/grafana/provisioning/dashboards:ro
+    profiles:
+      - staging
+      - monitoring
+
+volumes:
+  postgres_staging_data:
+  redis_staging_data:
+  prometheus_staging_data:
+  grafana_staging_data:
+
+networks:
+  default:
+    name: wisdom-oracle-staging
+    driver: bridge

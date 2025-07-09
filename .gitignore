@@ -1,1 +1,26 @@
 node_modules
+dist
+.DS_Store
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.staging
+
+# Docker volumes
+postgres_data/
+redis_data/
+prometheus_data/
+grafana_data/
+
+# Deployment artifacts
+*.tar.gz
+backup_*.sql
+
+# Kubernetes secrets
+k8s/overlays/*/secrets/
+
+# Monitoring data
+monitoring/data/
+logs/
