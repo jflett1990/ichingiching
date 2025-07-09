@@ -40,100 +40,105 @@ const HomePage: React.FC = () => {
           {/* Hero Content */}
           <div className="text-center lg:text-left z-10">
             <h1 
-              className="text-5xl lg:text-6xl font-bold mb-6 gradient-text leading-tight"
+              className="text-5xl lg:text-7xl font-bold mb-8 text-luxury text-luxury-spacing leading-tight animate-fade-in float-gentle"
               style={{ fontFamily: currentTheme.typography.secondary }}
             >
               Wisdom Oracle
             </h1>
             
             <p 
-              className="text-xl lg:text-2xl mb-8 opacity-90"
-              style={{ color: currentTheme.colors.textSecondary }}
+              className="text-xl lg:text-2xl mb-10 opacity-90 text-premium-spacing animate-slide-up"
+              style={{ 
+                color: currentTheme.colors.textSecondary,
+                animationDelay: '0.2s'
+              }}
             >
               Experience the ancient wisdom of the I Ching through cutting-edge 
               technology and AI-powered interpretations.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start animate-slide-up" style={{ animationDelay: '0.4s' }}>
               <button
                 onClick={handleStartDivination}
-                className="btn-premium text-lg px-8 py-4"
+                className="btn-luxury text-lg px-10 py-5 hover-lift focus-luxury"
               >
-                Begin Your Reading
+                Begin Your Journey
               </button>
               
               <button
                 onClick={handleTryDemo}
-                className="px-8 py-4 rounded-lg font-semibold transition-all hover:scale-105"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: `1px solid ${currentTheme.colors.glassBorder}`,
-                  color: currentTheme.colors.text,
-                }}
+                className="btn-glass text-lg px-10 py-5 hover-glow focus-luxury"
               >
-                Try Demo
+                Try Interactive Demo
               </button>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 mt-12">
-              <div className="text-center">
+            {/* Enhanced Stats */}
+            <div className="grid grid-cols-3 gap-8 mt-16">
+              <div className="text-center glass-luxury p-6 rounded-2xl hover-lift">
                 <div 
-                  className="text-3xl font-bold gradient-text"
+                  className="text-4xl font-bold text-luxury mb-2 animate-glow-pulse"
                   style={{ fontFamily: currentTheme.typography.secondary }}
                 >
                   64
                 </div>
-                <p className="text-sm opacity-70">Hexagrams</p>
+                <p className="text-sm opacity-80 text-premium-spacing uppercase tracking-wider">Ancient Hexagrams</p>
               </div>
-              <div className="text-center">
+              <div className="text-center glass-luxury p-6 rounded-2xl hover-lift">
                 <div 
-                  className="text-3xl font-bold gradient-text"
+                  className="text-4xl font-bold text-premium mb-2"
                   style={{ fontFamily: currentTheme.typography.secondary }}
                 >
                   {user?.stats?.totalReadings || 0}
                 </div>
-                <p className="text-sm opacity-70">Your Readings</p>
+                <p className="text-sm opacity-80 text-premium-spacing uppercase tracking-wider">Your Insights</p>
               </div>
-              <div className="text-center">
+              <div className="text-center glass-luxury p-6 rounded-2xl hover-lift">
                 <div 
-                  className="text-3xl font-bold gradient-text"
+                  className="text-4xl font-bold text-shimmer mb-2"
                   style={{ fontFamily: currentTheme.typography.secondary }}
                 >
                   AI
                 </div>
-                <p className="text-sm opacity-70">Powered</p>
+                <p className="text-sm opacity-80 text-premium-spacing uppercase tracking-wider">Powered Wisdom</p>
               </div>
             </div>
           </div>
 
-          {/* Interactive Demo */}
+          {/* Enhanced Interactive Demo */}
           <div className="relative">
-            <LiquidGlassCard size="lg" className="p-8">
+            <LiquidGlassCard 
+              variant="luxury" 
+              size="xl" 
+              className="p-10"
+              floating={true}
+              glow={true}
+            >
               {!isDemo ? (
                 <div className="text-center">
-                  <h3 className="text-2xl font-semibold mb-4">
-                    Experience the Three.js Coin Animation
+                  <h3 className="text-3xl font-bold mb-6 text-premium">
+                    Experience Our Revolutionary Coin Physics
                   </h3>
-                  <p className="opacity-80 mb-6">
-                    See our revolutionary 3-coin toss system in action with realistic physics
+                  <p className="opacity-90 mb-8 text-lg text-premium-spacing">
+                    Witness the magic of realistic Three.js physics simulation 
+                    combined with ancient divination wisdom
                   </p>
                   <button
                     onClick={handleTryDemo}
-                    className="btn-premium"
+                    className="btn-luxury text-xl px-12 py-6 hover-lift"
                   >
-                    Try Interactive Demo
+                    Launch Interactive Demo
                   </button>
                 </div>
               ) : (
                 <div>
-                  <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-xl font-semibold">Interactive Demo</h3>
+                  <div className="flex justify-between items-center mb-8">
+                    <h3 className="text-2xl font-bold text-luxury">Live Demo Experience</h3>
                     <button
                       onClick={resetDemo}
-                      className="text-sm opacity-70 hover:opacity-100 transition-opacity"
+                      className="btn-glass px-6 py-3 text-sm hover-glow"
                     >
-                      Reset
+                      Reset Demo
                     </button>
                   </div>
                   
@@ -145,21 +150,21 @@ const HomePage: React.FC = () => {
                   />
 
                   {demoResult && (
-                    <div className="mt-6 p-4 rounded-lg bg-black/10">
-                      <h4 className="font-semibold mb-2">Demo Complete!</h4>
-                      <p className="text-sm opacity-80">
-                        Hexagram #{demoResult.primaryNumber} generated
+                    <LiquidGlassCard variant="crystal" className="mt-8 p-6">
+                      <h4 className="font-bold mb-3 text-luxury text-xl">Demo Complete!</h4>
+                      <p className="text-base opacity-90 mb-6">
+                        Hexagram #{demoResult.primaryNumber} has been generated
                         {demoResult.changingLines.length > 0 && 
                           ` with ${demoResult.changingLines.length} changing lines`
                         }
                       </p>
                       <button
                         onClick={handleStartDivination}
-                        className="btn-premium mt-4 w-full"
+                        className="btn-luxury w-full text-lg py-4"
                       >
-                        Start Real Reading
+                        Begin Your Real Reading
                       </button>
-                    </div>
+                    </LiquidGlassCard>
                   )}
                 </div>
               )}
@@ -168,89 +173,121 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
+      {/* Enhanced Features Section */}
+      <section className="py-32 px-4">
+        <div className="max-w-7xl mx-auto">
           <h2 
-            className="text-4xl font-bold text-center mb-16 gradient-text"
+            className="text-5xl lg:text-6xl font-bold text-center mb-20 text-luxury text-shimmer"
             style={{ fontFamily: currentTheme.typography.secondary }}
           >
-            Premium Features
+            Luxury Features
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <LiquidGlassCard className="p-6 text-center">
+          <div className="grid md:grid-cols-3 gap-10">
+            <LiquidGlassCard 
+              variant="ultra" 
+              className="p-8 text-center"
+              interactive={true}
+              floating={true}
+            >
               <div 
-                className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                className="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-luxury"
                 style={{
                   background: `linear-gradient(135deg, ${currentTheme.colors.primary}, ${currentTheme.colors.secondary})`,
                 }}
               >
-                <span className="text-white text-2xl">🎯</span>
+                <span className="text-white text-3xl">🎯</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Realistic Physics</h3>
-              <p className="opacity-80">
-                Experience authentic coin tosses with advanced Three.js physics simulation
+              <h3 className="text-2xl font-bold mb-4 text-premium">Quantum Physics Engine</h3>
+              <p className="opacity-90 text-lg text-premium-spacing">
+                Experience authentic coin tosses with our revolutionary Three.js physics simulation featuring real-world gravity and momentum
               </p>
             </LiquidGlassCard>
 
-            <LiquidGlassCard className="p-6 text-center">
+            <LiquidGlassCard 
+              variant="ultra" 
+              className="p-8 text-center"
+              interactive={true}
+              floating={true}
+              shimmer={true}
+            >
               <div 
-                className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                className="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-luxury"
                 style={{
                   background: `linear-gradient(135deg, ${currentTheme.colors.secondary}, ${currentTheme.colors.accent})`,
                 }}
               >
-                <span className="text-white text-2xl">🤖</span>
+                <span className="text-white text-3xl">🤖</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3">AI Interpretations</h3>
-              <p className="opacity-80">
-                Get personalized insights powered by Claude AI for deeper understanding
+              <h3 className="text-2xl font-bold mb-4 text-luxury">AI-Powered Wisdom</h3>
+              <p className="opacity-90 text-lg text-premium-spacing">
+                Receive profound insights powered by Claude AI, delivering personalized interpretations that resonate with your soul
               </p>
             </LiquidGlassCard>
 
-            <LiquidGlassCard className="p-6 text-center">
+            <LiquidGlassCard 
+              variant="ultra" 
+              className="p-8 text-center"
+              interactive={true}
+              floating={true}
+              glow={true}
+            >
               <div 
-                className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                className="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-luxury"
                 style={{
                   background: `linear-gradient(135deg, ${currentTheme.colors.accent}, ${currentTheme.colors.primary})`,
                 }}
               >
-                <span className="text-white text-2xl">🎨</span>
+                <span className="text-white text-3xl">🎨</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Premium Themes</h3>
-              <p className="opacity-80">
-                Choose from 5 stunning themes including Art Nouveau and Cyberpunk
+              <h3 className="text-2xl font-bold mb-4 text-shimmer">Luxe Design Themes</h3>
+              <p className="opacity-90 text-lg text-premium-spacing">
+                Immerse yourself in 5 meticulously crafted themes including Art Nouveau elegance and Cyberpunk sophistication
               </p>
             </LiquidGlassCard>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <LiquidGlassCard size="xl" className="p-12">
+      {/* Luxury CTA Section */}
+      <section className="py-32 px-4">
+        <div className="max-w-5xl mx-auto text-center">
+          <LiquidGlassCard 
+            variant="luxury" 
+            size="2xl" 
+            className="p-16"
+            glow={true}
+            floating={true}
+            shimmer={true}
+          >
             <h2 
-              className="text-3xl lg:text-4xl font-bold mb-6 gradient-text"
+              className="text-4xl lg:text-6xl font-bold mb-8 text-luxury text-luxury-spacing"
               style={{ fontFamily: currentTheme.typography.secondary }}
             >
-              Ready to Discover Your Path?
+              Ready to Unlock Ancient Wisdom?
             </h2>
             
             <p 
-              className="text-xl mb-8 opacity-90"
+              className="text-2xl mb-12 opacity-95 text-premium-spacing"
               style={{ color: currentTheme.colors.textSecondary }}
             >
-              Join thousands who have found clarity through our modern approach to ancient wisdom.
+              Join thousands of seekers who have discovered profound insights through our 
+              luxurious fusion of ancient wisdom and cutting-edge technology.
             </p>
 
-            <button
-              onClick={handleStartDivination}
-              className="btn-premium text-xl px-12 py-5"
-            >
-              Begin Your Journey
-            </button>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <button
+                onClick={handleStartDivination}
+                className="btn-luxury text-xl px-16 py-6 hover-lift focus-luxury"
+              >
+                Begin Your Sacred Journey
+              </button>
+              
+              <div className="text-center">
+                <p className="text-sm opacity-70 mb-2 uppercase tracking-wider">Trusted by</p>
+                <p className="text-2xl font-bold text-shimmer">10,000+ Seekers</p>
+              </div>
+            </div>
           </LiquidGlassCard>
         </div>
       </section>
