@@ -15,6 +15,7 @@ const History = React.lazy(() => import('../pages/History'));
 const Instructions = React.lazy(() => import('../pages/Instructions'));
 const Settings = React.lazy(() => import('../pages/Settings'));
 const Profile = React.lazy(() => import('../pages/Profile'));
+const Premium = React.lazy(() => import('../pages/Premium'));
 const Themes = React.lazy(() => import('../pages/Themes'));
 const Patterns = React.lazy(() => import('../pages/Patterns'));
 const Conversations = React.lazy(() => import('../pages/Conversations'));
@@ -67,6 +68,11 @@ const routes = [
     path: '/profile',
     element: Profile,
     title: 'Profile',
+  },
+  {
+    path: '/premium',
+    element: Premium,
+    title: 'Premium',
   },
   // Premium routes
   {
