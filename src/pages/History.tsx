@@ -5,6 +5,7 @@ import { useTheme } from '../components/themes/ThemeProvider';
 import { useAppState, usePremiumFeatures } from '../store/AppStateProvider';
 import LiquidGlassCard from '../components/ui/LiquidGlassCard';
 import { LoadingScreen } from '../components/ui/LoadingScreen';
+import { exportSelectedReadings, exportAllData, exportDateRange } from '../utils/dataExport';
 
 interface FilterState {
   searchTerm: string;
@@ -179,6 +180,32 @@ const HistoryPage: React.FC = () => {
     }
   };
 
+  const handleBulkExport = async (format: 'json' | 'csv') => {
+    if (selectedReadings.size === 0) return;
+    
+    setIsLoading(true);
+    try {
+      await exportSelectedReadings(readings, Array.from(selectedReadings), user, format);
+      trackEvent('bulk_export', { format, count: selectedReadings.size });
+    } catch (error) {
+      console.error('Export failed:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleExportAll = async (format: 'json' | 'csv') => {
+    setIsLoading(true);
+    try {
+      await exportAllData(filteredReadings, user, format);
+      trackEvent('export_all', { format, count: filteredReadings.length });
+    } catch (error) {
+      console.error('Export failed:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const toggleReadingSelection = (id: string) => {
     const newSelection = new Set(selectedReadings);
     if (newSelection.has(id)) {
@@ -244,6 +271,25 @@ const HistoryPage: React.FC = () => {
                   </button>
                 )}
                 
+                {filteredReadings.length > 0 && (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleExportAll('json')}
+                      className="px-3 py-2 text-sm rounded-lg bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 transition-colors"
+                      title="Export all visible readings as JSON"
+                    >
+                      📄 JSON
+                    </button>
+                    <button
+                      onClick={() => handleExportAll('csv')}
+                      className="px-3 py-2 text-sm rounded-lg bg-green-500/20 text-green-300 hover:bg-green-500/30 transition-colors"
+                      title="Export all visible readings as CSV"
+                    >
+                      📊 CSV
+                    </button>
+                  </div>
+                )}
+                
                 <Link to="/divination" className="btn-premium">
                   ✨ New Reading
                 </Link>
@@ -286,6 +332,18 @@ const HistoryPage: React.FC = () => {
                     className="px-4 py-2 text-sm rounded-lg bg-yellow-500/20 text-yellow-300 hover:bg-yellow-500/30"
                   >
                     ⭐ Toggle Favorites
+                  </button>
+                  <button
+                    onClick={() => handleBulkExport('json')}
+                    className="px-4 py-2 text-sm rounded-lg bg-blue-500/20 text-blue-300 hover:bg-blue-500/30"
+                  >
+                    📄 Export JSON
+                  </button>
+                  <button
+                    onClick={() => handleBulkExport('csv')}
+                    className="px-4 py-2 text-sm rounded-lg bg-green-500/20 text-green-300 hover:bg-green-500/30"
+                  >
+                    📊 Export CSV
                   </button>
                   <button
                     onClick={handleBulkDelete}
